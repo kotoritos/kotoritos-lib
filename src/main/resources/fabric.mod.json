@@ -7,7 +7,7 @@
   "authors": [
     "kotoritos"
   ],
-  "license": "ARR",
+  "license": "MIT",
   "environment": "*",
   "entrypoints": {
     "main": [

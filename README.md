@@ -56,4 +56,6 @@ Run `tutorial.bat` from Command Prompt. It will:
 Required Gradle for bootstrap: **8.14.3**
 
 ## License
-**ARR (All Rights Reserved)** — author: **kotoritos**.
+**MIT** — free to use as a base for your own mods (author: **kotoritos**).
+
+If you use this library as a base, you are welcome to do so — contributions and credit are appreciated but not required by the license.
