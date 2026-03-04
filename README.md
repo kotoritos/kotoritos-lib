@@ -45,11 +45,12 @@ Kotorito Lib is a **library mod** for the Kotoritos ecosystem. It centralizes re
 ```
 
 ## Windows tutorial script (.bat)
-Run `tutorial.bat` from Command Prompt. It provides options to:
-1. Generate wrapper locally
-2. Build the mod JAR
-3. Run the development client
-4. Run full setup + build + client
+Run `tutorial.bat` from Command Prompt. It will:
+1. Generate/update the Gradle wrapper locally
+2. Compile the mod with `clean build`
+3. Output the JAR to `build\libs\`
+
+Required Gradle for bootstrap: **8.14.3**
 
 ## License
 **ARR (All Rights Reserved)** — author: **kotoritos**.

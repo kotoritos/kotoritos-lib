@@ -1,12 +1,12 @@
-# Windows build and run tutorial (.bat)
+# Windows build tutorial (.bat)
 
-This project includes `tutorial.bat` so you can bootstrap, compile, and run the mod on Windows.
+This project includes `tutorial.bat` so you can bootstrap and compile the mod on Windows.
 
 > Repository policy: this project is kept source-only. Binary outputs must be generated locally and are not committed.
 
 ## Prerequisites
 1. Install **Java 17**.
-2. Install **Gradle** (used once to generate wrapper files).
+2. Install **Gradle 8.14.3** (used to generate wrapper files and bootstrap the first build).
 3. Ensure internet access to:
    - `services.gradle.org`
    - `maven.fabricmc.net`
@@ -21,19 +21,12 @@ This project includes `tutorial.bat` so you can bootstrap, compile, and run the 
    ```bat
    tutorial.bat
    ```
-4. Choose option `1` to generate the wrapper locally.
-5. Choose option `2` to build the mod JAR.
-
-## Run client in development
-- Open `tutorial.bat` and choose option `3`, or run directly:
-  ```bat
-  gradlew.bat runClient
-  ```
+4. The script will generate the wrapper and compile the mod automatically.
 
 ## Output location
 After build, the mod JAR is generated in:
 - `build\libs\`
 
 ## About `.exe`
-The official workflow provided by this repository is `tutorial.bat`.
+The official workflow provided by this repository is `tutorial.bat` (build-only).
 If needed, you may convert it to `.exe` with a third-party tool on your machine, but that executable is out of scope for repository source control.
