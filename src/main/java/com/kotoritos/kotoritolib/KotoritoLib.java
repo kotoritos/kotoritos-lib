@@ -2,6 +2,7 @@ package com.kotoritos.kotoritolib;
 
 import com.kotoritos.kotoritolib.api.lifecycle.ServerStartedCallback;
 import com.kotoritos.kotoritolib.api.lifecycle.ServerStoppingCallback;
+import com.kotoritos.kotoritolib.api.scheduler.ServerTaskScheduler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import org.slf4j.Logger;
@@ -20,8 +21,9 @@ public final class KotoritoLib implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        ServerTaskScheduler.bootstrap();
         registerLifecycleBridges();
-        LOGGER.info("{} initialized: lifecycle bridge and API utilities are available.", MOD_NAME);
+        LOGGER.info("{} initialized: lifecycle bridge, scheduler, and API utilities are available.", MOD_NAME);
     }
 
     private static void registerLifecycleBridges() {

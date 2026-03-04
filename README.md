@@ -5,7 +5,7 @@ Kotorito Lib is a **library mod** for the Kotoritos ecosystem. It centralizes re
 ## Why this project exists
 - Provide a single shared dependency for all future Kotoritos mods.
 - Reduce duplicate utility code across projects.
-- Standardize identifiers, registry helpers, lifecycle events, and API versioning.
+- Standardize identifiers, registry helpers, lifecycle events, scheduling, and API versioning.
 - Keep the project fully documented for long-term GitHub maintenance.
 
 ## Technical baseline
@@ -22,16 +22,19 @@ Kotorito Lib is a **library mod** for the Kotoritos ecosystem. It centralizes re
 - **Lifecycle bridge events** exposed to other mods:
   - `ServerStartedCallback`
   - `ServerStoppingCallback`
+- **Server scheduler API** (`ServerTaskScheduler`) for delayed/repeating tasks.
 - **ID utilities** (`ModId`) for safe and consistent `Identifier` creation.
-- **Registry utilities** (`RegistryTools`) for cleaner registration patterns.
-- **API version utility** (`ApiVersion`) to support compatibility checks in dependent mods.
+- **Registry utilities** (`RegistryTools`) for cleaner registration patterns and lazy suppliers.
+- **JSON config utilities** (`ConfigIO`) to read/create/write config files.
+- **Weighted random utility** (`WeightedSelector`) for weighted picks.
+- **API version utility** (`ApiVersion`) for compatibility checks in dependent mods.
 
 ## Project structure
 - `src/main/java/com/kotoritos/kotoritolib/KotoritoLib.java` – mod initializer and lifecycle bridge.
 - `src/main/java/com/kotoritos/kotoritolib/api/` – public reusable API package.
 - `docs/research.md` – compatibility research and implementation decisions.
 - `docs/dependency-guide.md` – how future mods should depend on this lib.
-- `tutorial.bat` – Windows helper to bootstrap wrapper/build/run.
+- `tutorial.bat` – Windows helper to bootstrap wrapper/build.
 - `docs/windows-build-tutorial.md` – step-by-step Windows usage guide.
 
 ## Build

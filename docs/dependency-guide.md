@@ -31,25 +31,60 @@ dependencies {
 }
 ```
 
-## 3) Use the public API
+## 3) Use identifier and registry helpers
 
 ```java
 import com.kotoritos.kotoritolib.api.ModId;
-import com.kotoritos.kotoritolib.api.lifecycle.ServerStartedCallback;
+import com.kotoritos.kotoritolib.api.RegistryTools;
 
-public final class MyModEntrypoint {
-    public static void register() {
-        var id = ModId.id("my_resource");
-
-        ServerStartedCallback.EVENT.register(server -> {
-            int onlinePlayers = server.getPlayerManager().getPlayerList().size();
-            System.out.println("[MyMod] Server started with " + onlinePlayers + " players online.");
-        });
-    }
-}
+var id = ModId.id("my_resource");
+var block = RegistryTools.register(myRegistry, "my_mod", "example_block", () -> createBlock());
 ```
 
-## 4) Compatibility checks (recommended)
+## 4) Use lifecycle callbacks
+
+```java
+import com.kotoritos.kotoritolib.api.lifecycle.ServerStartedCallback;
+
+ServerStartedCallback.EVENT.register(server -> {
+    int onlinePlayers = server.getPlayerManager().getPlayerList().size();
+    System.out.println("[MyMod] Server started with " + onlinePlayers + " players online.");
+});
+```
+
+## 5) Use delayed/repeating tasks
+
+```java
+import com.kotoritos.kotoritolib.api.scheduler.ServerTaskScheduler;
+
+ServerStartedCallback.EVENT.register(server -> {
+    ServerTaskScheduler.schedule(server, 100, () -> System.out.println("Runs after 5 seconds"));
+    ServerTaskScheduler.scheduleRepeating(server, 20, 20, () -> System.out.println("Runs every second"));
+});
+```
+
+## 6) Use JSON config helper
+
+```java
+import com.google.gson.GsonBuilder;
+import com.kotoritos.kotoritolib.api.config.ConfigIO;
+
+var gson = new GsonBuilder().setPrettyPrinting().create();
+var config = ConfigIO.readOrCreate(configPath, gson, MyConfig.class, MyConfig::new);
+```
+
+## 7) Use weighted random helper
+
+```java
+import com.kotoritos.kotoritolib.api.collections.WeightedSelector;
+
+var selector = new WeightedSelector<String>()
+        .add("common", 70)
+        .add("rare", 25)
+        .add("legendary", 5);
+```
+
+## 8) Compatibility checks (recommended)
 
 ```java
 import com.kotoritos.kotoritolib.api.version.ApiVersion;
@@ -57,7 +92,7 @@ import com.kotoritos.kotoritolib.api.version.ApiVersion;
 boolean supported = ApiVersion.isMajorCompatible(1);
 ```
 
-## 5) Best practices
+## 9) Best practices
 - Put shared cross-mod logic in Kotorito Lib, not in each individual mod.
-- Keep your dependent mods focused on their own gameplay content.
+- Keep dependent mods focused on gameplay content.
 - Upgrade dependency versions intentionally and test migration paths.

@@ -5,7 +5,7 @@ This document captures the technical research used to define the Kotorito Lib ba
 ## Research goals
 - Ensure the project targets a stable, widely-used Fabric setup.
 - Minimize version mismatch risk for future dependent mods.
-- Define a versioning and API strategy suitable for a long-lived library mod.
+- Provide practical APIs that reduce repetitive code in downstream mods.
 
 ## Compatibility conclusions
 1. **Minecraft 1.20.1 + Java 17** is the correct runtime baseline for this branch.
@@ -15,7 +15,7 @@ This document captures the technical research used to define the Kotorito Lib ba
 ## Implementation decisions from research
 - Use explicit dependency coordinates in `gradle.properties` and `build.gradle`.
 - Keep `fabric.mod.json` strict with dependency constraints.
-- Expose lifecycle callbacks and utility APIs as the first stable feature set.
+- Expose lifecycle callbacks, task scheduling, config I/O, and registry utilities as reusable APIs.
 - Start with semantic API versioning (`1.0.0`) and major-compatibility checks.
 
 ## Future hardening roadmap
