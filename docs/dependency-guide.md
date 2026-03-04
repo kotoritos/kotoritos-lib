@@ -41,7 +41,7 @@ var id = ModId.id("my_resource");
 var block = RegistryTools.register(myRegistry, "my_mod", "example_block", () -> createBlock());
 ```
 
-## 4) Use lifecycle callbacks
+## 4) Use lifecycle callbacks (server)
 
 ```java
 import com.kotoritos.kotoritolib.api.lifecycle.ServerStartedCallback;
@@ -54,6 +54,8 @@ ServerStartedCallback.EVENT.register(server -> {
 
 ## 5) Use delayed/repeating tasks
 
+### Server scheduler
+
 ```java
 import com.kotoritos.kotoritolib.api.scheduler.ServerTaskScheduler;
 
@@ -61,6 +63,15 @@ ServerStartedCallback.EVENT.register(server -> {
     ServerTaskScheduler.schedule(server, 100, () -> System.out.println("Runs after 5 seconds"));
     ServerTaskScheduler.scheduleRepeating(server, 20, 20, () -> System.out.println("Runs every second"));
 });
+```
+
+### Client scheduler
+
+```java
+import com.kotoritos.kotoritolib.api.client.ClientTickScheduler;
+
+ClientTickScheduler.schedule(40, () -> System.out.println("Runs after 2 seconds on client"));
+ClientTickScheduler.scheduleRepeating(20, 20, () -> System.out.println("Runs every second on client"));
 ```
 
 ## 6) Use JSON config helper
@@ -84,7 +95,25 @@ var selector = new WeightedSelector<String>()
         .add("legendary", 5);
 ```
 
-## 8) Compatibility checks (recommended)
+## 8) Client optimization helpers
+
+```java
+import com.kotoritos.kotoritolib.api.client.PerformanceSnapshot;
+import com.kotoritos.kotoritolib.api.client.render.DebugHudLineProvider;
+
+int current = PerformanceSnapshot.currentFps();
+int average = PerformanceSnapshot.averageFps();
+var lines = DebugHudLineProvider.defaultPerformanceLines();
+```
+
+```java
+import com.kotoritos.kotoritolib.api.client.input.KeyBindingTools;
+import org.lwjgl.glfw.GLFW;
+
+var key = KeyBindingTools.register("key.mymod.toggle_optimizer", GLFW.GLFW_KEY_O, "category.mymod.general");
+```
+
+## 9) Compatibility checks (recommended)
 
 ```java
 import com.kotoritos.kotoritolib.api.version.ApiVersion;
@@ -92,7 +121,7 @@ import com.kotoritos.kotoritolib.api.version.ApiVersion;
 boolean supported = ApiVersion.isMajorCompatible(1);
 ```
 
-## 9) Best practices
+## 10) Best practices
 - Put shared cross-mod logic in Kotorito Lib, not in each individual mod.
-- Keep dependent mods focused on gameplay content.
+- Keep dependent mods focused on gameplay/content logic.
 - Upgrade dependency versions intentionally and test migration paths.

@@ -12,6 +12,9 @@
   "entrypoints": {
     "main": [
       "com.kotoritos.kotoritolib.KotoritoLib"
+    ],
+    "client": [
+      "com.kotoritos.kotoritolib.client.KotoritoLibClient"
     ]
   },
   "depends": {
